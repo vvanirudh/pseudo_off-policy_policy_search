@@ -102,12 +102,6 @@ def save_results(method, problem, analysis, results):
     store[key] = results
     store.close()
 
-def load_results(method, problem, analysis):
-    store = pandas.HDFStore(problem + "_" + analysis + '_store.h5')
-    key = method # + ", " + datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
-    results = store[key]
-    store.close()
-    return results
 
 def write_data_to_csv():
     all_analysis = {'misspecification','sample_complexity'}
@@ -227,5 +221,3 @@ def plot_results(problem, analysis):
                 plt.ylim((0,500))
                 #plt.xlim((0,20000))
                 #print "XLIM WAS MODIFIED!!!!"
-
-    store.close()

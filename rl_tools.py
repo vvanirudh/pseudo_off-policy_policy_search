@@ -286,7 +286,7 @@ class Domain:
         return data
 
     def simulate_episode(self, policy=None):
-        np.random.seed(int(1e6*time.time()))
+        # np.random.seed(int(1e6*time.time()))
         episode_data = pandas.DataFrame(index=range(self.episode_length), columns=self.data_columns)
         s = self.initstate.copy()
         if policy is None: # create batch training data
