@@ -70,6 +70,7 @@ def evaluate_approach(method, problem, analysis, save_it=False, trial_start=0):
         for domain in domains:
             if method != 'true_model':
                 data = domain.generate_batch_data(N=np.max(all_n))
+                print 'generated data'
             for n in all_n:
                 if method == 'true_model':
                     policy = domain.optimal_policy()
@@ -82,12 +83,14 @@ def evaluate_approach(method, problem, analysis, save_it=False, trial_start=0):
                     #policy = pops.best_policy(domain, smaller_data)
                     policy = pops.best_policy(domain, data[:n])
                 elif method == 'max_likelihood_approx':
+                    print 'running max_likelihood_approx'
                     policy = ml.approx_model_policy(domain, data[:n])
                 elif method == 'max_likelihood_big_discrete':
                     policy = ml.discrete_model_policy(domain, data[:n])
                 else:
                     raise Exception('Unknown policy learning method: ' + method)
                 result = domain.evaluate_policy(policy)
+                print result
                 if problem + "_" + analysis + '_store_run3.h5' in os.listdir('.'):
                     results = load_results(method, problem, analysis)
                 results[domain.input_pars][n, trial] = result
